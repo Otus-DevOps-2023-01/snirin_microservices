@@ -5,12 +5,15 @@ snirin microservices repository
 ERROR:  Error installing bundler:                                                                                                                                                                    
 26.53   The last version of bundler (>= 0) to support your Ruby & RubyGems was 2.3.26. Try installing it with `gem install bundler -v 2.3.26`
 
-todo объяснить различия
-todo Повторение практики из демо на лекции
-todo повторение tehbilly/htop после лекции
-
 Для себя
+docker desktop
 `docker run = docker create + docker start + docker attach`
+
+Полезные команды
+https://dockerlabs.collabnix.com/docker/cheatsheet/
+https://raw.githubusercontent.com/sangam14/dockercheatsheets/master/dockercheatsheet8.png
+
+
 Список команд
 ```
 docker version
@@ -91,4 +94,6 @@ ls /
 
 docker-machine rm docker-host
 yc compute instance delete docker-host
+
+sudo !!
 ```

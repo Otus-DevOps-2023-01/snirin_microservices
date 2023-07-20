@@ -5,4 +5,6 @@ nginx                     latest    021283c8eb95   13 days ago      187MB
 ubuntu                    18.04     f9a80a55f492   7 weeks ago      63.2MB
 hello-world               latest    9c7a54a9a43c   2 months ago     13.3kB
 
-todo объяснить различия
+Контейнер - это запущенный образ.
+В ответе `docker inspect` для контейнера, например, есть поле State, описывающее его состояние.
+У образа это поле отсутствует.
