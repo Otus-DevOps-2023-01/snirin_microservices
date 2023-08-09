@@ -96,4 +96,10 @@ docker-machine rm docker-host
 yc compute instance delete docker-host
 
 sudo !!
+
+source venv/bin/activate
+ansible-inventory --list
+ansible all -m ping -o
+
+cd ../terraform/; terraform destroy -auto-approve; terraform apply -auto-approve; cd ../ansible/; ansible-playbook docker_install.yml
 ```
