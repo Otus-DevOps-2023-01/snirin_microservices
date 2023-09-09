@@ -59,12 +59,18 @@ ERROR:  Error installing bundler:
 	The last version of bundler (>= 0) to support your Ruby & RubyGems was 2.3.26. Try installing it with `gem install bundler -v 2.3.26`
 	bundler requires Ruby version >= 2.6.0. The current ruby version is 2.5.0.
 ```
-поправилось указанием старой версии bundler `1.17.3` 
+поправилось указанием старой версии bundler `1.17.3`:
+```
+RUN apt-get update \
+    && apt-get install -y ruby-full ruby-dev build-essential \
+    && gem install bundler -v 1.17.3 --no-ri --no-rdoc
+```
 
 Для себя
 Список команд
 ```
 docker network create reddit;
+docker volume create reddit_db;
 
 docker pull mongo:latest;
 docker build -t snirinnn/post:1.0 ./post-py;
@@ -73,10 +79,11 @@ docker build -t snirinnn/ui:1.0 ./ui;
 
 docker kill $(docker ps -q);
 
-docker run -d --network=reddit  --network-alias=post_db --network-alias=comment_db mongo:latest;
+docker run -d --network=reddit --network-alias=post_db --network-alias=comment_db -v reddit_db:/data/db mongo:latest;
 docker run -d --network=reddit  --network-alias=post snirinnn/post:1.0;
 docker run -d --network=reddit  --network-alias=comment snirinnn/comment:1.0;
 docker run -d --network=reddit  -p 9292:9292 snirinnn/ui:1.0;
+docker ps;
 
 docker build --no-cache --progress=plain -t snirinnn/post:4.0 ./post-py; docker run --network=reddit  --network-alias=post -it snirinnn/post:4.0 bash;
 
@@ -117,10 +124,11 @@ docker attach ead70ea1fa33
 docker exec -it ead70ea1fa33 bash
 docker inspect 3fa7e364b9d8
 docker ps -q
-docker kill $(docker ps -q)
-docker system df
-docker rm $(docker ps -a -q)
-docker rmi $(docker images -q)
+
+docker kill $(docker ps -q);
+docker system df;
+docker rm $(docker ps -a -q);
+docker rmi $(docker images -q);
 
 docker-machine create <имя>
 eval $(docker-machine env <имя>

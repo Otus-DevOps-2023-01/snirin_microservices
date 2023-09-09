@@ -1,15 +1,24 @@
-FROM ubuntu:16.04
-RUN apt-get update \
-    && apt-get install -y ruby-full ruby-dev build-essential \
-    && gem install bundler -v 1.17.3 --no-ri --no-rdoc
+FROM alpine:3.5
 
 ENV APP_HOME /app
 RUN mkdir $APP_HOME
-
 WORKDIR $APP_HOME
-ADD Gemfile* $APP_HOME/
-RUN bundle install
-ADD . $APP_HOME
+COPY Gemfile* $APP_HOME/
+COPY . $APP_HOME
+
+RUN apk add --update \
+    curl wget bash nano \
+    ruby ruby-bundler \
+    ca-certificates libressl \
+    libressl-dev build-base ruby-dev \
+    ruby-rdoc ruby-io-console ruby-irb \
+    # install
+    && bundle install \
+    # remove packages
+    && apk del  \
+    ca-certificates libressl \
+    libressl-dev build-base ruby-dev \
+    ruby-io-console ruby-irb
 
 ENV POST_SERVICE_HOST post
 ENV POST_SERVICE_PORT 5000
