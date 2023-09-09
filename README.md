@@ -52,6 +52,14 @@ ENV COMMENT_DATABASE_HOST comment_db
 ENV COMMENT_DATABASECOMMENT_SERVICE_PORT comments
 ```
 
+5. После обновления докер-файла для ui из https://raw.githubusercontent.com/express42/otus-snippets/master/hw-16/Сервис%20ui%20-%20улучшаем%20образ
+была ошибка
+```
+ERROR:  Error installing bundler:
+	The last version of bundler (>= 0) to support your Ruby & RubyGems was 2.3.26. Try installing it with `gem install bundler -v 2.3.26`
+	bundler requires Ruby version >= 2.6.0. The current ruby version is 2.5.0.
+```
+поправилось указанием старой версии bundler `1.17.3` 
 
 Для себя
 Список команд
