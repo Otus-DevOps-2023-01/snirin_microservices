@@ -1,17 +1,15 @@
 FROM python:3.6.0-alpine
 
 WORKDIR /app
-ADD . /app
+COPY . /app
 
-RUN apk --no-cache --update add build-base && \
+RUN apk --no-cache --update add build-base bash && \
     pip install --upgrade pip \
-    pip install -r /app/requirements.txt && \
-    pip install -r /app/requirements.txt && \
+    pip install --no-cache-dir -r /app/requirements.txt && \
+    pip install --no-cache-dir -r /app/requirements.txt && \
     apk del build-base
 
 ENV POST_DATABASE_HOST post_db
 ENV POST_DATABASE posts
-
-RUN apk update && apk add bash
 
 ENTRYPOINT ["python3", "post_app.py"]
