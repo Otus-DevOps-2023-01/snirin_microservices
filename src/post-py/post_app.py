@@ -172,8 +172,8 @@ def add_post():
                   "Bad input parameters. Reason: {}".format(str(e)))
         abort(400)
     try:
-        app.db.insert({'title': title, 'link': link,
-                       'created_at': created_at, 'votes': 0})
+        app.db.insert_one({'title': title, 'link': link,
+                           'created_at': created_at, 'votes': 0})
     except Exception as e:
         log_event('error', 'post_create',
                   "Failed to create a post. Reason: {}".format(str(e)),

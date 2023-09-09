@@ -4,10 +4,14 @@ WORKDIR /app
 ADD . /app
 
 RUN apk --no-cache --update add build-base && \
+    pip install --upgrade pip \
+    pip install -r /app/requirements.txt && \
     pip install -r /app/requirements.txt && \
     apk del build-base
 
 ENV POST_DATABASE_HOST post_db
 ENV POST_DATABASE posts
+
+RUN apk update && apk add bash
 
 ENTRYPOINT ["python3", "post_app.py"]
