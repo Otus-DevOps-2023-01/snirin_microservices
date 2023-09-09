@@ -2,7 +2,11 @@
 snirin microservices repository
 
 ДЗ 17 docker-3
-todo hadolint все докер файлы
+Сделано:
+- Созданы и запущены образы трех микросервисов
+- Образы оптимизированы через hadolint
+- Образы ui и comment переделаны на alpine:3.5 и уменьшены до 60 мегабайт
+- Исправлено несколько ошибок (ниже)
 
 Ошибки:
 1. При сборке образов на выполнении команды `apt-get update` возникала ошибка
@@ -124,6 +128,8 @@ docker attach ead70ea1fa33
 docker exec -it ead70ea1fa33 bash
 docker inspect 3fa7e364b9d8
 docker ps -q
+
+docker scan --severity high nginx
 
 docker kill $(docker ps -q);
 docker system df;
